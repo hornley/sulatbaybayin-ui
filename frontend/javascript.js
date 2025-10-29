@@ -49,9 +49,11 @@ translateButton.addEventListener("click", async () => {
         // parsing
         const data = await response.json();
 
-        // update outputs
-        imageOutput.innerHTML = `<img src="${data.output_url}" alt="Processed Baybayin Image">`;
-        textOutput.innerHTML = `<strong>Translation:</strong> ${data.translation}`;
+  // update outputs: image and textual predictions
+  imageOutput.innerHTML = `<img src="${data.output_url}" alt="Processed Baybayin Image">`;
+  // show best translation and full predictions text (predictions_txt)
+  const predText = data.predictions_txt ? data.predictions_txt : '';
+  textOutput.innerHTML = `<strong>Translation:</strong> ${data.translation}<br><pre style="white-space:pre-wrap; text-align:left;">${predText}</pre>`;
     } catch (error) {
         console.error("Error:", error);
         imageOutput.innerHTML = "<p>Error processing image.</p>";
