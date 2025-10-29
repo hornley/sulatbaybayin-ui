@@ -150,6 +150,16 @@ def process_image():
             pass
 
 
+@app.route('/health')
+def health():
+    """Simple health endpoint that reports whether the model is loaded."""
+    return jsonify({
+        'status': 'ok',
+        'model_loaded': bool(_MODEL_LOADED),
+        'ckpt_path': CKPT_PATH if 'CKPT_PATH' in globals() else None
+    })
+
+
 if __name__ == '__main__':
     # Use debug for local development. In production use a WSGI server.
     app.run(host='127.0.0.1', port=5000, debug=True)
