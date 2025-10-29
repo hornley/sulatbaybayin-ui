@@ -17,4 +17,6 @@ RUN pip install torch torchvision --index-url https://download.pytorch.org/whl/c
 
 EXPOSE 5000
 
-CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:5000", "--workers", "1", "--threads", "4"]
+# Bind to the port provided by the environment (Railway sets $PORT)
+# Use sh -c so $PORT is expanded at container runtime
+CMD ["sh", "-c", "gunicorn app:app --bind 0.0.0.0:5000 --workers 1 --threads 4"]
