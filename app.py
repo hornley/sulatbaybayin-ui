@@ -4,6 +4,7 @@ import io
 import base64
 import tempfile
 import traceback
+import urllib.request
 
 # Try to import inference helpers
 try:
@@ -31,10 +32,26 @@ def find_checkpoint(root='.'):
 MODEL = None
 CLASSES = []
 _MODEL_LOADED = False
-CKPT_PATH = "C:\\Users\\buend\\Documents\\GitHub\\sulat-baybayin-ui\\models\\best_seen.pth"
+# Determine checkpoint path: prefer explicit env var, otherwise try downloading from INFER_CKPT_URL,
+# otherwise auto-discover a .pth under the repo.
+CKPT_PATH = os.environ.get('INFER_CKPT')
+if not CKPT_PATH:
+    ckpt_url = os.environ.get('INFER_CKPT_URL')
+    if ckpt_url:
+        try:
+            dest = os.path.join(tempfile.gettempdir(), 'infer_checkpoint.pth')
+            print(f"Downloading checkpoint from {ckpt_url} -> {dest}")
+            urllib.request.urlretrieve(ckpt_url, dest)
+            CKPT_PATH = dest
+        except Exception:
+            print('Failed to download checkpoint from INFER_CKPT_URL:')
+            traceback.print_exc()
+    else:
+        CKPT_PATH = find_checkpoint('.')
+
 if CKPT_PATH and load_checkpoint is not None:
     try:
-        # load to CPU by default (script handles cuda selection internally but we force cpu map)
+        # load to CPU by default
         MODEL, CLASSES = load_checkpoint(CKPT_PATH, device='cpu')
         _MODEL_LOADED = True
         print(f"Loaded checkpoint: {CKPT_PATH}")
@@ -43,7 +60,7 @@ if CKPT_PATH and load_checkpoint is not None:
         traceback.print_exc()
 else:
     if CKPT_PATH is None:
-        print('No checkpoint found automatically. Set INFER_CKPT env var to point to a .pth file.')
+        print('No checkpoint found automatically. Set INFER_CKPT or INFER_CKPT_URL to point to a .pth file.')
     if load_checkpoint is None:
         print('Inference helpers not available (missing script.infer).')
 
