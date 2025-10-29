@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css">
+        <script src="javascript.js" defer></script>
+        <title>
+            Sulat Baybayin
+        </title>
+    </head>
+    <body>
+        <div class="title-description">
+                <p class="title">
+                    Sulat Baybayin
+                </p>
+                <p class="description">
+                    Upload your image below to translate!
+                </p>
+        </div>
+        <div class="input-section">
+            <input type="file" id="inputImage" accept="image/*" hidden>
+            <button class="input-button" id="uploadButton">
+                Upload image
+            </button>
+            <div class="image-checker" id="imageChecker">
+                No Image Has Been Uploaded
+            </div>
+            <button class="translate-button" id="translateButton">
+                Translate Now!
+            </button>
+        </div>
+        <div class="output-section">
+
+            <div class="image-output" id="imageOutput">
+                
+            </div>
+            <div class="text-output" id="textOutput">
+
+            </div>
+        </div>
+    </body>
+</html>
