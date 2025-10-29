@@ -26,37 +26,47 @@ inputImage.addEventListener("change", () => {
 });
 //translate now buttom
 translateButton.addEventListener("click", async () => {
-    if(!selectedFile) {
-       alert("Upload an image first!");
-       return; 
+  if(!selectedFile) {
+     alert("Upload an image first!");
+     return; 
+  }
+
+  // indicate translating state
+  const originalButtonText = translateButton.textContent;
+  translateButton.disabled = true;
+  translateButton.textContent = 'Translating... please wait';
+  imageOutput.innerHTML = `<p>Translating... please wait</p>`;
+
+  //stuff to ready things to send to AI
+  const formData = new FormData();
+  formData.append("image", selectedFile);
+
+  try {
+    //send image to AI
+    const response = await fetch("/process_image", {
+    method: "POST",
+    body: formData,
+    });
+
+    if (!response.ok) {
+    throw new Error(`Server error: ${response.status}`);
     }
 
-    //stuff to ready things to send to AI
-    const formData = new FormData();
-    formData.append("image", selectedFile);
+    // parsing
+    const data = await response.json();
 
-    try {
-        //send image to AI
-        const response = await fetch("/process_image", {
-        method: "POST",
-        body: formData,
-        });
-
-        if (!response.ok) {
-        throw new Error(`Server error: ${response.status}`);
-        }
-
-        // parsing
-        const data = await response.json();
-
-  // update outputs: image and textual predictions
-  imageOutput.innerHTML = `<img src="${data.output_url}" alt="Processed Baybayin Image">`;
-  // show best translation and full predictions text (predictions_txt)
-  const predText = data.predictions_txt ? data.predictions_txt : '';
-  textOutput.innerHTML = `<strong>Translation:</strong> ${data.translation}<br><pre style="white-space:pre-wrap; text-align:left;">${predText}</pre>`;
-    } catch (error) {
-        console.error("Error:", error);
-        imageOutput.innerHTML = "<p>Error processing image.</p>";
-        textOutput.innerHTML = "<p>Translation failed.</p>";
-    }
+    // update outputs: image and textual predictions
+    imageOutput.innerHTML = `<img src="${data.output_url}" alt="Processed Baybayin Image">`;
+    // show best translation and full predictions text (predictions_txt)
+    const predText = data.predictions_txt ? data.predictions_txt : '';
+    textOutput.innerHTML = `<strong>Translation:</strong> ${data.translation}<br><pre style="white-space:pre-wrap; text-align:left;">${predText}</pre>`;
+  } catch (error) {
+    console.error("Error:", error);
+    imageOutput.innerHTML = "<p>Error processing image.</p>";
+    textOutput.innerHTML = "<p>Translation failed.</p>";
+  } finally {
+    // restore button state
+    translateButton.disabled = false;
+    translateButton.textContent = originalButtonText;
+  }
 });
