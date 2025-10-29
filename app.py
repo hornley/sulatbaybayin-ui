@@ -5,6 +5,8 @@ import base64
 import tempfile
 import traceback
 import urllib.request
+import threading
+import time
 
 # Try to import inference helpers
 try:
@@ -49,15 +51,30 @@ if not CKPT_PATH:
     else:
         CKPT_PATH = find_checkpoint('.')
 
-if CKPT_PATH and load_checkpoint is not None:
+def _load_model_background(path):
+    """Background model loader. Sets global MODEL, CLASSES and _MODEL_LOADED."""
+    global MODEL, CLASSES, _MODEL_LOADED
+    if not path:
+        print('No checkpoint path provided to background loader.')
+        return
+    if load_checkpoint is None:
+        print('load_checkpoint not available; cannot load model.')
+        return
     try:
-        # load to CPU by default
-        MODEL, CLASSES = load_checkpoint(CKPT_PATH, device='cpu')
+        print(f'Starting background model load from {path}')
+        MODEL, CLASSES = load_checkpoint(path, device='cpu')
         _MODEL_LOADED = True
-        print(f"Loaded checkpoint: {CKPT_PATH}")
+        print(f'Loaded checkpoint: {path}')
     except Exception:
-        print('Failed to load checkpoint:')
+        print('Failed to load checkpoint in background:')
         traceback.print_exc()
+
+
+# Start background loading if a checkpoint is available
+if CKPT_PATH:
+    # kick off loader in a daemon thread so the process can accept requests immediately
+    t = threading.Thread(target=_load_model_background, args=(CKPT_PATH,), daemon=True)
+    t.start()
 else:
     if CKPT_PATH is None:
         print('No checkpoint found automatically. Set INFER_CKPT or INFER_CKPT_URL to point to a .pth file.')
