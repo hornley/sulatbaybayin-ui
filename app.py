@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory, request, jsonify
+from flask import Flask, send_from_directory, request, jsonify, render_template
 import os
 import io
 import base64
@@ -8,7 +8,7 @@ import urllib.request
 import threading
 import time
 
-# Try to import inference helpers
+
 try:
     from script.infer import load_checkpoint, draw_predictions
 except Exception:
@@ -17,8 +17,13 @@ except Exception:
     draw_predictions = None
 
 # Serve the existing frontend folder as static files.
-app = Flask(__name__, static_folder='frontend', static_url_path='')
+app = Flask(
+    __name__,
+    template_folder='frontend/templates',
+    static_folder='frontend/static')
 
+
+# Try to import inference helpers
 
 def find_checkpoint(root='.'):
     """Search for a .pth checkpoint file under the repo and return first match or None."""
@@ -84,24 +89,25 @@ else:
 
 @app.route('/')
 def index():
-    # Serve the frontend/index.html
-    return app.send_static_file('index.html')
+    """Renders the front page from templates/front.html."""
+    # Ensure front.html is in your templates/ folder
+    return render_template('front.html')
+
+@app.route('/translate')
+def translate():
+    """Renders the translator page from templates/translate.html."""
+    # Ensure translate.html is in your templates/ folder
+    return render_template('translate.html')
+
+@app.route('/alphabet')
+def alphabet():
+    """Renders the alphabet guide page from templates/alphabet.html."""
+    # Ensure alphabet.html is in your templates/ folder
+    return render_template('alphabet.html')
 
 
-@app.route('/<path:path>')
-def static_proxy(path):
-    """Serve a file from the frontend folder if it exists, otherwise fall back to index.html.
 
-    This supports single-page apps that use client-side routing.
-    """
-    frontend_dir = os.path.join(app.root_path, app.static_folder)
-    file_path = os.path.join(frontend_dir, path)
-    if os.path.isfile(file_path):
-        return send_from_directory(frontend_dir, path)
-    # fallback to index.html
-    return app.send_static_file('index.html')
-
-
+# API 
 @app.route('/process_image', methods=['POST'])
 def process_image():
     """Endpoint the frontend calls. Accepts multipart form 'image'. Runs detection and returns

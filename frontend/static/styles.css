@@ -5,10 +5,33 @@ body {
     padding: 0;
     font-family: 'Times New Roman';
     display: flex;
-
+    background-image: url('assets/Background.png');
     flex-direction: column;
-    overflow: scroll;
+    overflow: auto;
 }
+.translate-button {
+    /* This button is now a container for the image */
+    width: 480px; /* Estimated width of your image */
+    height: 133px; /* Estimated height of your image */
+    
+    /* Set the image as the button's background */
+    background-image: url('assets/TranslateButton.png');
+    background-size: contain;       /* Ensure the image is fully visible */
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    /* Remove default button styles that conflict with the image */
+    background-color: transparent;  /* Ensure button color doesn't hide image */
+    border: none;                   /* Remove border */
+    box-shadow: none;               /* Remove box shadow */
+    padding: 0;                     /* Remove default padding */
+    
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.1s;
+}
+
+
 
 div {
     display: flex;
@@ -25,6 +48,7 @@ div {
 .title {
     font-size: 36px;
     font-weight: bold;
+    text-align: center;
 }
 
 

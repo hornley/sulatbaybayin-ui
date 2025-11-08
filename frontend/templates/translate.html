@@ -2,8 +2,8 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="styles.css">
-        <script src="javascript.js" defer></script>
+        <link rel="stylesheet" href="{{ url_for('static',filename='styles.css')}}">
+        <script src="{{url_for('static', filename='javascript.js') }}" defer></script>
         <title>
             Sulat Baybayin
         </title>
@@ -23,10 +23,10 @@
                 Upload image
             </button>
             <div class="image-checker" id="imageChecker">
-                No Image Has Been Uploaded
+                No Image Has Been UploQaded
             </div>
             <button class="translate-button" id="translateButton">
-                Translate Now!
+            
             </button>
         </div>
         <div class="output-section">
@@ -37,6 +37,9 @@
             <div class="text-output" id="textOutput">
 
             </div>
+        </div>
+        <div id="frontpage"> 
+             
         </div>
     </body>
 </html>
