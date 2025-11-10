@@ -5,6 +5,19 @@ const translateButton = document.getElementById("translateButton");
 const imageOutput = document.getElementById("imageOutput");
 const textOutput = document.getElementById("textOutput");
 
+
+function adjustTextOutputHeight() {
+  //Reset height to auto first to get the natural height
+  textOutput.style.height='auto';
+  
+  //Calculate the required height with a minimum
+  const scrollHeight =textOutput.scrollHeight;
+  const minHeight = 150; // Minimum height in pixels
+  const calculatedHeight = Math.max(minHeight, scrollHeight + 20); // Padding 
+
+  //Set the new height 
+  textOutput.style.height = calculatedHeight + 'px';
+}
 //temporary image
 let selectedFile = null;
 
@@ -13,15 +26,14 @@ inputImage.addEventListener("change", () => {
   
   if (selectedFile) {
     // change text in image checker to confirm file uploaded
-    imageChecker.textContent = `Image uploaded: ${selectedFile.name}`;
-    imageChecker.style.color = "green"; // optional: visual cue
+    imageOutput.innerHTML = `Image uploaded: ${selectedFile.name}`;
   } else {
     // go back to normal text if the file is invalid
     imageChecker.textContent = "No Image Has Been Uploaded";
     imageChecker.style.color = "red";
   }
 });
-//uplaod Button
+//upload Button
 uploadButton.addEventListener("click", () => {
   inputImage.click();
 });
@@ -35,7 +47,6 @@ translateButton.addEventListener("click", async () => {
   // indicate translating state
   const originalButtonText = translateButton.textContent;
   translateButton.disabled = true;
-  translateButton.textContent = 'Translating... please wait';
   imageOutput.innerHTML = `<p>Translating... please wait</p>`;
 
   //stuff to ready things to send to AI
@@ -71,5 +82,6 @@ translateButton.addEventListener("click", async () => {
     translateButton.textContent = originalButtonText;
   }
 }
+
 
 );

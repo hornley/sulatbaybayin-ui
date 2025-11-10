@@ -34,6 +34,7 @@ def find_checkpoint(root='.'):
     return None
 
 
+
 # Try to locate and load a checkpoint at startup (if available). The path can be overridden
 # by setting the INFER_CKPT environment variable.
 MODEL = None
