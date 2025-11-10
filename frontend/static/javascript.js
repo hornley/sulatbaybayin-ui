@@ -8,9 +8,6 @@ const textOutput = document.getElementById("textOutput");
 //temporary image
 let selectedFile = null;
 
-//file input
-uploadButton.addEventListener("click", () => inputImage.click());
-
 inputImage.addEventListener("change", () => {
   selectedFile = inputImage.files[0];
   
@@ -23,6 +20,10 @@ inputImage.addEventListener("change", () => {
     imageChecker.textContent = "No Image Has Been Uploaded";
     imageChecker.style.color = "red";
   }
+});
+//uplaod Button
+uploadButton.addEventListener("click", () => {
+  inputImage.click();
 });
 //translate now buttom
 translateButton.addEventListener("click", async () => {
@@ -69,4 +70,6 @@ translateButton.addEventListener("click", async () => {
     translateButton.disabled = false;
     translateButton.textContent = originalButtonText;
   }
-});
+}
+
+);

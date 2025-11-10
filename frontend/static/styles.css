@@ -1,34 +1,93 @@
+/*Fonts     */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap');
 body {
-    height: 100vh;
-    width: auto;
     margin: 0;
     padding: 0;
-    font-family: 'Times New Roman';
-    display: flex;
-    background-image: url('assets/Background.png');
-    flex-direction: column;
-    overflow: auto;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    background-image: url('assets/Background1.png'); /* Use your main paper image */
+    background-size: cover; /* Or 'contain' depending on your goal */
+    background-position: center;
+    background-attachment: fixed;
+    background-color: #f5e4c3; /* Use a matching base color */
+    overflow:hidden;
 }
-.translate-button {
+.hero-section {
+   margin-top: -5vh;
+}
+.title, .title-description,.page-header h1 {
+    /* Use the font family you imported */
+    font-family: 'Playfair Display SC', serif;
+    /* Set the desired large size */
+    font-size:80px !important; 
+    /* Include other styling */
+    color: #c29c6d; 
+    text-align: center;
+}
+.title-description {
+    font-size: 24px !important; 
+    margin-top: -8.5vh;
+    padding-bottom: 30px;
+}
+
+.translate-button,.translate-button2,.alphabetButton,.input-button {
     /* This button is now a container for the image */
     width: 480px; /* Estimated width of your image */
     height: 133px; /* Estimated height of your image */
-    
-    /* Set the image as the button's background */
-    background-image: url('assets/TranslateButton.png');
+    /* Remove default button styles that conflict with the image */
+    background-color: transparent;  /* Ensure button color doesn't hide image */
     background-size: contain;       /* Ensure the image is fully visible */
     background-repeat: no-repeat;
     background-position: center;
-    
-    /* Remove default button styles that conflict with the image */
-    background-color: transparent;  /* Ensure button color doesn't hide image */
     border: none;                   /* Remove border */
     box-shadow: none;               /* Remove box shadow */
     padding: 0;                     /* Remove default padding */
-    
+ 
     cursor: pointer;
     margin-top: 20px;
     transition: transform 0.1s;
+}
+
+.translate-button, .translate-button2{
+    /* Set the image as the button's background */
+    background-image: url('assets/TranslateButton.png');
+}
+.translate-button2{
+    width: 480px; /* Estimated width of your image */
+    height: 70px !important; /* Estimated height of your image */
+}
+
+.alphabetButton{
+    /* Set the image as the button's background */
+    background-image: url('assets/AlphabetButton.png');
+}
+
+
+.input-button {
+    /* This button is now a container for the image */
+    width: 480px; /* Estimated width of your image */
+    height: 70px; /* Estimated height of your image */
+    
+    /* Set the image as the button's background */
+    background-image: url('assets/UploadButton.png');
+ 
+}
+/*hover effects*/
+.alphabetButton:hover{
+    transform: scale(1.05);
+    background-image: url('assets/HoverButton3.png');
+}
+.input-button:hover {
+    transform: scale(1.05);
+    background-image: url('assets/HoverButton2.png');
+}
+
+.translate-button,.translate-button2:hover{
+
+    transform: scale(1.05);
+    background-image: url('assets/HoverButton1.png');
 }
 
 
@@ -39,22 +98,10 @@ div {
     align-items: center;
 }
 
-/*title descirption edits*/
-
-.title-desciption {
-    padding-bottom: 30px;
-}
-
-.title {
-    font-size: 36px;
-    font-weight: bold;
-    text-align: center;
-}
-
-
 /*input section edits*/
 .input-section {
     padding-bottom: 30px;
+    margin-top: -6.5vh;
 }
 
 .image-checker {
@@ -65,10 +112,17 @@ div {
 .output-section {
     justify-content: space-evenly;
     padding-bottom: 30px;
+    
+    /*font for output text*/
+    font-family: 'schoolbell', serif;
+    font-size:250%;
+    color:#996f3c;
 }
 .image-output {
     width: 600px;
-    height: 400px;
+    min-height: 300px;
+    max-height: 40vh;
+    height: auto;
     background-image:url('assets/InsertBox.png');
     background-size:cover;
     background-position: center;
@@ -81,14 +135,20 @@ div {
 
 .image-output img{
     max-width: 100%;
+    max-height: 100%;
     height: auto;
     display: block;
 }
 
 .text-output {
+    margin-top: -2.5vh;
     width: 300px;
-    height: 50px;
-    border: 2px solid black;
-    background-color: grey;
+    height: 150px;
+    background-image:url('assets/InsertBox.png');
+    background-size: 100% 100%;
+    background-repeat:no-repeat;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: left;
     overflow: hidden;
 }

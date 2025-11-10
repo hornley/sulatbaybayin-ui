@@ -6,12 +6,7 @@
         <title> Sulat Baybayin - Home></title>
     </head>
     <body>
-        <nav class="main-nav">
-            <a href="{{ url_for ('index') }}"> Home</a>
-            <a href="{{ url_for ('translate') }}"> translate</a>
-            <a href="{{ url_for ('alphabet') }}"> alphabet</a>
-        </nav>
-
+       
         <header class="hero-section">
             <h1 class="title"> Sulat Baybayin</h1>
         </header>
@@ -20,10 +15,10 @@
             <a href="{{ url_for('translate') }}" class="cta-link">
                 <button class="translate-button" id="translateButton"></button>
             </a>
+            <a href="{{ url_for('alphabet') }}">
+            <button class="alphabetButton" id="alphabetButton"></button>
+            </a>.
             
-            <p class="learn-more">
-                Want to learn the script? View the full Baybayin alphabet <a href="{{ url_for('alphabet') }}">here</a>.
-            </p>
         </div>
     </body>
 </html>
