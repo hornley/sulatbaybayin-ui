@@ -1,14 +1,3 @@
-<script>
-fetch('/health')
-  .then(r => r.json())
-  .then(data => {
-    if (data.model_loaded) {
-      document.getElementById('upload-btn').disabled = false;
-    } else {
-      document.getElementById('status').innerText = 'Model loading...';
-    }
-  });
-</script>
 <!DOCTYPE html>
 <html lang="en">
     <head>
