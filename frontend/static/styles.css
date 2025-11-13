@@ -24,6 +24,13 @@ div {
   align-items: center;
 }
 
+ .translate-button,
+  .translate-button2,
+  .alphabetButton,
+  .input-button {
+    aspect-ratio: 5 / 2;
+    margin-bottom:2.5dvh;
+  }
 
 /* ==================================
    HOME BUTTON
