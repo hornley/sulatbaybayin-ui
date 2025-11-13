@@ -1,210 +1,243 @@
-/*Fonts     */
+/* ==================================
+   GLOBAL & MOBILE-FIRST BASE STYLES
+   ================================== */
+
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap');
+
 body {
-   
-    padding: 0;
-    font-family: Arial, sans-serif;
-    min-height: 100vh;
-    background-image: url('assets/Background1.png'); /* Use your main paper image */
-    background-size: cover; /* Or 'contain' depending on your goal */
-    background-position: center;
-    background-attachment: fixed;
-    background-color: #f5e4c3; /* Use a matching base color */
-    overflow:auto;
-}
-.alphabetBody {
-    background-image: url("assets/BaybayinGuide.png");
-}
-.alphabet-header{
-    margin-top:-11dvh;
-}
-.hero-section {
-   margin-top: -5vh;
-}
-.title, .title-description,.alphabet-header h1 {
-    /* Use the font family you imported */
-    font-family: 'Playfair Display SC', serif;
-    /* Set the desired large size */
-    font-size:80px !important; 
-    /* Include other styling */
-    color: #c29c6d; 
-    text-align: center;
-}
-.title-description {
-    font-size: 24px !important; 
-    margin-top: -5.5vh;
-    padding-bottom: 30px;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  background: #f5e4c3 url('assets/Background1.png') center/cover fixed no-repeat;
+  overflow-x: hidden;
 }
 
+/* For pages using a different background */
+.alphabetBody {
+  background-image: url("assets/BaybayinGuide.png");
+}
+
+/* Generic container setup */
+div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ==================================
+   HOME BUTTON
+   ================================== */
 .home-btn {
-  width: 5rem;
-  height: 5rem;
+  width: clamp(3rem, 5vw, 5rem);
+  height: clamp(3rem, 5vw, 5rem);
   background-color: #d4d0ab85;
-  padding: .3em;
-  margin-left:1dvh;
-  margin-top:1dvh;
+  padding: 0.3em;
+  position: fixed;
+  top: 1dvh;
+  left: 1dvh;
   border: 2px outset #a8a58a;
   border-radius: 50%;
+  z-index: 100;
+  transition: transform 0.1s, background-color 0.2s;
 }
 
 .home-btn:active {
   border: 2px inset #a8a58a;
 }
 
-
 .home-btn a {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-bottom: 5px solid #a8a58a;
-    border-left: 10px solid #d4d0ab;
-    border-right: 10px solid #d4d0ab;
-    box-shadow: 0 0 0 3px #333, inset 0 0 0 3px #333;
-    position: relative;
-    top: 8px;
-    cursor: pointer;
-    transition: transform 0.1s;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-bottom: 5px solid #a8a58a;
+  border-left: 10px solid #d4d0ab;
+  border-right: 10px solid #d4d0ab;
+  box-shadow: 0 0 0 3px #333, inset 0 0 0 3px #333;
+  position: relative;
+  top: 8px;
+  cursor: pointer;
+  transition: transform 0.1s;
 }
+
 .home-btn a::before {
-    content: "";
-    display: block;
-    position: relative;
-    left: -19px;
-    bottom: 22px;
-    border-bottom: 21px solid #333;
-    border-right: 29px solid transparent;
-    border-left: 29px solid transparent;
-    box-shadow: 0px 3px 0 0px #333;
-}
-.translate-button,.translate-button2,.alphabetButton,.input-button {
-    /* This button is now a container for the image */
-    width: 480px; /* Estimated width of your image */
-    height: 133px; /* Estimated height of your image */
-    /* Remove default button styles that conflict with the image */
-    background-color: transparent;  /* Ensure button color doesn't hide image */
-    background-size: contain;       /* Ensure the image is fully visible */
-    background-repeat: no-repeat;
-    background-position: center;
-    border: none;                   /* Remove border */
-    box-shadow: none;               /* Remove box shadow */
-    padding: 0;                     /* Remove default padding */
- 
-    cursor: pointer;
-    margin-top: 20px;
-    transition: transform 0.1s;
+  content: "";
+  position: relative;
+  left: -19px;
+  bottom: 22px;
+  border-bottom: 21px solid #333;
+  border-right: 29px solid transparent;
+  border-left: 29px solid transparent;
+  box-shadow: 0 3px 0 0 #333;
 }
 
-.translate-button, .translate-button2{
-    /* Set the image as the button's background */
-    background-image: url('assets/TranslateButton.png');
-}
-.translate-button2{
-    width: 480px; /* Estimated width of your image */
-    height: 70px !important; /* Estimated height of your image */
-}
-
-.alphabetButton{
-    /* Set the image as the button's background */
-    background-image: url('assets/AlphabetButton.png');
-}
-
-
+/* ==================================
+   DYNAMIC BUTTONS (WORKS FOR IMAGES)
+   ================================== */
+.translate-button,
+.translate-button2,
+.alphabetButton,
 .input-button {
-    /* This button is now a container for the image */
-    width: 480px; /* Estimated width of your image */
-    height: 70px; /* Estimated height of your image */
-    
-    /* Set the image as the button's background */
-    background-image: url('assets/UploadButton.png');
- 
-}
-/*hover effects*/
-.alphabetButton:hover{
-    transform: scale(1.05);
-    background-image: url('assets/HoverButton3.png');
-}
-.input-button:hover {
-    transform: scale(1.05);
-    background-image: url('assets/HoverButton2.png');
+  width: clamp(120px, 60vw, 400px); /* scales with viewport width */
+  aspect-ratio: 5 / 2; /* keeps consistent shape */
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  padding: 0;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  flex-shrink: 0; /* prevents collapsing in flex containers */
 }
 
-.translate-button:hover,.translate-button2:hover{
-
-    transform: scale(1.05);
-    background-image: url('assets/HoverButton1.png');
+/* Button backgrounds */
+.translate-button,
+.translate-button2 {
+  background-image: url('assets/TranslateButton.png');
 }
-.home-btn:hover{
-    background-color: #eaac5e;
-    transform: scale(1.05);
+.alphabetButton {
+  background-image: url('assets/AlphabetButton.png');
 }
-
-
-
-div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.input-button {
+  background-image: url('assets/UploadButton.png');
 }
 
-/*input section edits*/
-.input-section {
-    padding-bottom: 30px;
-    margin-top: -6.5vh;
+/* Override for smaller screens (<768px) */
+@media (max-width: 767px) {
+  .translate-button,
+  .translate-button2,
+  .alphabetButton,
+  .input-button {
+    width: clamp(100px, 80vw, 320px); /* increases relative width for mobile */
+    aspect-ratio: 5 / 2;
+  }
 }
 
-.image-checker {
-    padding: 20px;
-}
-/*output section edits*/
-
-.output-section {
-    justify-content: space-evenly;
-    padding-bottom: 30px;
-    
-    /*font for output text*/
-    font-family: 'schoolbell', serif;
-    font-size:250%;
-    color:#996f3c;
-}
+/* ==================================
+   RESPONSIVE OUTPUT BOXES
+   ================================== */
 .image-output {
+  width: 90%;
+  max-width: 600px;
+  min-height: 200px;
+  max-height: 50vh;
+  background: url('assets/InsertBox.png') center/cover no-repeat;
+}
+
+.text-output {
+  width: 90%;
+  max-width: 600px;
+  min-height: 100px;
+  max-height: 60vh;
+  padding: 4vh;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  background: url('assets/InsertBox.png') center/100% 100% no-repeat;
+  text-align: left;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  color: #996f3c;
+  font-family: 'Schoolbell', serif;
+}
+
+/* ==================================
+   TITLES & LAYOUT
+   ================================== */
+.title, .title-description, .alphabet-header h1 {
+  font-family: 'Playfair Display SC', serif;
+  color: #c29c6d;
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(2rem, 6vw, 5rem);
+}
+
+.title-description {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  margin-top: -3vh;
+  padding-bottom: 20px;
+}
+
+.alphabet-header {
+  margin-top: 5vh;
+}
+
+.hero-section {
+  margin-top: 10vh;
+}
+
+/* ==================================
+   DESKTOP (min-width: 768px)
+   ================================== */
+@media (min-width: 768px) {
+  .translate-button,
+  .translate-button2,
+  .alphabetButton,
+  .input-button {
+    width: clamp(200px, 30%, 480px);
+    aspect-ratio: 5 / 2;
+  }
+
+  .image-output {
     width: 600px;
     min-height: 300px;
     max-height: 40vh;
-    height: auto;
-    background-image:url('assets/InsertBox.png');
-    background-size:cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+  }
+
+  .text-output {
+    width: 600px;
+    min-height: 150px;
+    padding: 10vh;
+  }
+
+  .alphabet-header {
+    margin-top: -11vh;
+  }
+
+  .hero-section {
+    margin-top: -5vh;
+  }
+
+  .input-section {
+    margin-top: -6.5vh;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .column {
+    flex: 1;
+  }
 }
 
-.image-output img{
-    max-width: 100%;
-    max-height: 100%;
-    height: auto;
-    display: block;
+/* ==================================
+   HOVER EFFECTS
+   ================================== */
+.alphabetButton:hover {
+  transform: scale(1.05);
+  background-image: url('assets/HoverButton3.png');
 }
-.text-output {
-    margin-top:0.5dvh;
-    min-width: 300px;
-    max-width: 100%;
-    min-height: 150px;
-    max-height: 60vh;
-    background-image: url('assets/InsertBox.png');
-    background-size: 100% 100%; 
-    background-repeat: no-repeat;
-    background-position: center;
-    padding: 10dvh;
-    box-sizing: border-box;
-    text-align: left;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    font-size:larger;
+.input-button:hover {
+  transform: scale(1.05);
+  background-image: url('assets/HoverButton2.png');
+}
+.translate-button:hover,
+.translate-button2:hover {
+  transform: scale(1.05);
+  background-image: url('assets/HoverButton1.png');
+}
+.home-btn:hover {
+  background-color: #eaac5e;
+  transform: scale(1.05);
 }

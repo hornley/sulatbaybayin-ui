@@ -2,7 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
+        
         <title> Sulat Baybayin - Home></title>
     </head>
     <body>
@@ -21,10 +23,10 @@
         <div class="main-content">
 
             <a href="{{ url_for('translate') }}" class="cta-link">
-                <button class="translate-button" id="translateButton"></button>
+                <button class="translate-button" id="translateButton">.</button>
             </a>
             <a href="{{ url_for('alphabet') }}">
-            <button class="alphabetButton" id="alphabetButton"></button>
+            <button class="alphabetButton" id="alphabetButton">.</button>
             </a>.
             
         </div>
