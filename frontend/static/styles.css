@@ -15,22 +15,11 @@ body {
   overflow-x: hidden;
 }
 
-
-
-/* Generic container setup */
 div {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
- .translate-button,
-  .translate-button2,
-  .alphabetButton,
-  .input-button {
-    aspect-ratio: 5 / 2;
-    margin-bottom:2.5dvh;
-  }
 
 /* ==================================
    HOME BUTTON
@@ -39,9 +28,9 @@ div {
   width: 5rem;
   height: 5rem;
   background-color: #d4d0ab85;
-  padding: .3em;
-  margin-left:1dvh;
-  margin-top:1dvh;
+  padding: 0.3em;
+  margin-left: 1dvh;
+  margin-top: 1dvh;
   border: 2px outset #a8a58a;
   border-radius: 50%;
 }
@@ -50,45 +39,46 @@ div {
   border: 2px inset #a8a58a;
 }
 
-
 .home-btn a {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-bottom: 5px solid #a8a58a;
-    border-left: 10px solid #d4d0ab;
-    border-right: 10px solid #d4d0ab;
-    box-shadow: 0 0 0 3px #333, inset 0 0 0 3px #333;
-    position: relative;
-    top: 8px;
-    cursor: pointer;
-    transition: transform 0.1s;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-bottom: 5px solid #a8a58a;
+  border-left: 10px solid #d4d0ab;
+  border-right: 10px solid #d4d0ab;
+  box-shadow: 0 0 0 3px #333, inset 0 0 0 3px #333;
+  position: relative;
+  top: 8px;
+  cursor: pointer;
+  transition: transform 0.1s;
 }
+
 .home-btn a::before {
-    content: "";
-    display: block;
-    position: relative;
-    left: -19px;
-    bottom: 22px;
-    border-bottom: 21px solid #333;
-    border-right: 29px solid transparent;
-    border-left: 29px solid transparent;
-    box-shadow: 0px 3px 0 0px #333;
+  content: "";
+  display: block;
+  position: relative;
+  left: -19px;
+  bottom: 22px;
+  border-bottom: 21px solid #333;
+  border-right: 29px solid transparent;
+  border-left: 29px solid transparent;
+  box-shadow: 0px 3px 0 0px #333;
 }
-.home-btn:hover{
-    background-color: #eaac5e;
-    transform: scale(1.05);
+
+.home-btn:hover {
+  background-color: #eaac5e;
+  transform: scale(1.05);
 }
 
 /* ==================================
-   DYNAMIC BUTTONS (WORKS FOR IMAGES)
+   DYNAMIC BUTTONS
    ================================== */
 .translate-button,
 .translate-button2,
 .alphabetButton,
 .input-button {
-  width: clamp(120px, 60vw, 400px); /* scales with viewport width */
-  aspect-ratio: 5 / 2; /* keeps consistent shape */
+  width: clamp(120px, 60vw, 400px);
+  aspect-ratio: 5 / 2;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -98,10 +88,9 @@ div {
   margin-top: 20px;
   cursor: pointer;
   transition: transform 0.2s ease;
-  flex-shrink: 0; /* prevents collapsing in flex containers */
+  flex-shrink: 0;
 }
 
-/* Button backgrounds */
 .translate-button,
 .translate-button2 {
   background-image: url('assets/TranslateButton.png');
@@ -113,31 +102,16 @@ div {
   background-image: url('assets/UploadButton.png');
 }
 
-/* Override for smaller screens (<768px) */
-@media (max-width: 767px) {
-  .translate-button,
-  .translate-button2,
-  .alphabetButton,
-  .input-button {
-    width: clamp(100px, 80vw, 320px); /* increases relative width for mobile */
-    aspect-ratio: 5 / 2;
-  }
-   .alphabet-image{
-    width: clamp(50px, 90vw, 460px);
-  }
-}
-
 /* ==================================
-   RESPONSIVE OUTPUT BOXES
+   OUTPUT SECTIONS
    ================================== */
 .output-section {
-justify-content: space-evenly;
-padding-bottom: 30px;
-
-/*font for output text*/
-font-family: 'schoolbell', serif;
-font-size:250%;
-color:#996f3c;
+  justify-content: space-evenly;
+  padding-bottom: 30px;
+  text-align: center;
+  font-family: 'Schoolbell', serif;
+  font-size: 250%;
+  color: #996f3c;
 }
 
 .image-output {
@@ -145,14 +119,18 @@ color:#996f3c;
   max-width: 600px;
   min-height: 200px;
   max-height: 50vh;
-  margin-bottom:1dvh;
+  margin-bottom: 1dvh;
   background: url('assets/InsertBox.png') center/cover no-repeat;
-
-}
-.image-output h2{
+  word-break: break-all;
   text-align: center;
-  padding-top: 5dvh;
+  padding: 10dvh;
+  box-sizing: border-box;
+}
 
+.image-output h2, 
+.image-output .file-name {
+  text-align: center;
+  padding: 0;
 }
 
 .text-output {
@@ -174,22 +152,25 @@ color:#996f3c;
 }
 
 /* ==================================
-   TITLES & LAYOUT
+   TITLES & HEADERS
    ================================== */
-.title, .title-description, .alphabet-header h1 {
+.title, 
+.title-description, 
+.alphabet-header h1 {
   font-family: 'Playfair Display SC', serif;
   color: #c29c6d;
   text-align: center;
 }
 
 .title {
-  font-size: clamp(2rem, 6vw, 5rem);
+  font-size: clamp(1.5rem, 5vw, 5rem);
+  margin-top: 5vh;
 }
 
 .title-description {
-  font-size: clamp(1rem, 3vw, 1.5rem);
-  margin-top: -3vh;
-  padding-bottom: 20px;
+  font-size: clamp(0.9rem, 3vw, 1.5rem);
+  margin-top: -1vh;
+  padding-bottom: 15px;
 }
 
 .alphabet-header {
@@ -197,11 +178,66 @@ color:#996f3c;
 }
 
 .hero-section {
-  margin-top: 10vh;
+  margin-top: 0;
 }
 
 /* ==================================
-   DESKTOP (min-width: 768px)
+   MOBILE FIXES (<768px)
+   ================================== */
+@media (max-width: 767px) {
+
+  /* Restore header visibility */
+  .alphabet-header, .title, .title-description {
+    margin-top: 1vh !important;
+  }
+
+  .title {
+    font-size:5vh;
+  }
+
+  .title-description {
+    font-size:2.5vh;
+    margin-top:-2vh !important;
+  }
+
+  .output-section {
+    font-size: 120%;
+    margin-top:-2vh !important;
+  }
+
+  .image-output {
+    min-height: 120px;
+    padding: 5vh;
+    margin-top:2vh;
+  }
+
+  .text-output {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    padding: 3vh;
+  }
+
+  .translate-button,
+  .translate-button2,
+  .alphabetButton,
+  .input-button {
+    width: clamp(100px, 80vw, 320px);
+    aspect-ratio: 5 / 2;
+    margin-top:-2vh !important;
+    margin-bottom:-2vh !important;
+    
+  }
+
+  .alphabet-image {
+    width: clamp(50px, 90vw, 460px);
+  }
+
+  .hero-section {
+    margin-top: 2vh;
+  }
+}
+
+/* ==================================
+   DESKTOP (≥768px)
    ================================== */
 @media (min-width: 768px) {
   .translate-button,
@@ -210,8 +246,8 @@ color:#996f3c;
   .input-button {
     width: clamp(200px, 30%, 480px);
     aspect-ratio: 5 / 2;
-    min-width:600px;
-    max-height:100px;
+    min-width: 600px;
+    max-height: 100px;
   }
 
   .image-output {
@@ -230,8 +266,9 @@ color:#996f3c;
     margin-top: -11vh;
   }
 
-  .hero-section {
-    margin-top: -5vh;
+  .title-description {
+    margin-top: -7vh;
+    margin-bottom: 3vh;
   }
 
   .input-section {
@@ -248,26 +285,29 @@ color:#996f3c;
   .column {
     flex: 1;
   }
-  .alphabet-image{
-  background-position:center;
-  background-size: contain;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  border: none;
-  box-shadow:none;
-  padding: 0;
-  cursor: pointer;
-  margin-top:20px;
-  transition:transform 0.1;
-     width: clamp(50px, 100vw, 1080px);
 
-  max-height:75dvh;
-}
+  .alphabet-image {
+    background-position: center;
+    background-size: contain;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.1s;
+    width: clamp(50px, 100vw, 1080px);
+    max-height: 75dvh;
+  }
 
-.alphabet-content:hover{
-  transform: scale(1.05);
-}
- 
+  .alphabet-content:hover {
+    transform: scale(1.05);
+  }
+
+  .title {
+    margin-top: -6vh;
+  }
 }
 
 /* ==================================
@@ -290,4 +330,3 @@ color:#996f3c;
   background-color: #eaac5e;
   transform: scale(1.05);
 }
-
