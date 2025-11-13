@@ -15,10 +15,7 @@ body {
   overflow-x: hidden;
 }
 
-/* For pages using a different background */
-.alphabetBody {
-  background-image: url("assets/BaybayinGuide.png");
-}
+
 
 /* Generic container setup */
 div {
@@ -27,50 +24,53 @@ div {
   align-items: center;
 }
 
+
 /* ==================================
    HOME BUTTON
    ================================== */
 .home-btn {
-  width: clamp(3rem, 5vw, 5rem);
-  height: clamp(3rem, 5vw, 5rem);
+  width: 5rem;
+  height: 5rem;
   background-color: #d4d0ab85;
-  padding: 0.3em;
-  position: fixed;
-  top: 1dvh;
-  left: 1dvh;
+  padding: .3em;
+  margin-left:1dvh;
+  margin-top:1dvh;
   border: 2px outset #a8a58a;
   border-radius: 50%;
-  z-index: 100;
-  transition: transform 0.1s, background-color 0.2s;
 }
 
 .home-btn:active {
   border: 2px inset #a8a58a;
 }
 
-.home-btn a {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border-bottom: 5px solid #a8a58a;
-  border-left: 10px solid #d4d0ab;
-  border-right: 10px solid #d4d0ab;
-  box-shadow: 0 0 0 3px #333, inset 0 0 0 3px #333;
-  position: relative;
-  top: 8px;
-  cursor: pointer;
-  transition: transform 0.1s;
-}
 
+.home-btn a {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-bottom: 5px solid #a8a58a;
+    border-left: 10px solid #d4d0ab;
+    border-right: 10px solid #d4d0ab;
+    box-shadow: 0 0 0 3px #333, inset 0 0 0 3px #333;
+    position: relative;
+    top: 8px;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
 .home-btn a::before {
-  content: "";
-  position: relative;
-  left: -19px;
-  bottom: 22px;
-  border-bottom: 21px solid #333;
-  border-right: 29px solid transparent;
-  border-left: 29px solid transparent;
-  box-shadow: 0 3px 0 0 #333;
+    content: "";
+    display: block;
+    position: relative;
+    left: -19px;
+    bottom: 22px;
+    border-bottom: 21px solid #333;
+    border-right: 29px solid transparent;
+    border-left: 29px solid transparent;
+    box-shadow: 0px 3px 0 0px #333;
+}
+.home-btn:hover{
+    background-color: #eaac5e;
+    transform: scale(1.05);
 }
 
 /* ==================================
@@ -115,17 +115,37 @@ div {
     width: clamp(100px, 80vw, 320px); /* increases relative width for mobile */
     aspect-ratio: 5 / 2;
   }
+   .alphabet-image{
+    width: clamp(50px, 90vw, 460px);
+  }
 }
 
 /* ==================================
    RESPONSIVE OUTPUT BOXES
    ================================== */
+.output-section {
+justify-content: space-evenly;
+padding-bottom: 30px;
+
+/*font for output text*/
+font-family: 'schoolbell', serif;
+font-size:250%;
+color:#996f3c;
+}
+
 .image-output {
   width: 90%;
   max-width: 600px;
   min-height: 200px;
   max-height: 50vh;
+  margin-bottom:1dvh;
   background: url('assets/InsertBox.png') center/cover no-repeat;
+
+}
+.image-output h2{
+  text-align: center;
+  padding-top: 5dvh;
+
 }
 
 .text-output {
@@ -183,6 +203,8 @@ div {
   .input-button {
     width: clamp(200px, 30%, 480px);
     aspect-ratio: 5 / 2;
+    min-width:600px;
+    max-height:100px;
   }
 
   .image-output {
@@ -219,6 +241,26 @@ div {
   .column {
     flex: 1;
   }
+  .alphabet-image{
+  background-position:center;
+  background-size: contain;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  box-shadow:none;
+  padding: 0;
+  cursor: pointer;
+  margin-top:20px;
+  transition:transform 0.1;
+     width: clamp(50px, 100vw, 1080px);
+
+  max-height:75dvh;
+}
+
+.alphabet-content:hover{
+  transform: scale(1.05);
+}
+ 
 }
 
 /* ==================================
@@ -241,3 +283,4 @@ div {
   background-color: #eaac5e;
   transform: scale(1.05);
 }
+

@@ -9,7 +9,7 @@
             Sulat Baybayin
         </title>
     </head>
-   <body class= "alphabetBody">
+   <body>
        <section>
         <button class="home-btn">
         <a href="{{url_for('index')}}"></a>
@@ -19,10 +19,8 @@
     <header class="alphabet-header">
         <h1> The Baybayin Script</h1>
     </header>
-  
-
-    <section>
-        
-    </section>
+        <div class="alphabet-content">
+            <img src="{{ url_for('static', filename='assets/BaybayinGuide.png') }}" alt="Baybayin Alphabet Guide" class="alphabet-image">
+        </div>
    </body>
 </html>
