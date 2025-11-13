@@ -60,18 +60,40 @@ translateButton.addEventListener("click", async () => {
     body: formData,
     });
 
+    // parse JSON response even when not OK so we can surface server-side error details
+    const data = await response.json().catch(() => null);
     if (!response.ok) {
-    throw new Error(`Server error: ${response.status}`);
+      const serverMsg = data && (data.error || data.details) ? `${data.error || 'Server error'}: ${data.details || ''}` : `Server error: ${response.status}`;
+      throw new Error(serverMsg);
     }
 
-    // parsing
-    const data = await response.json();
-
     // update outputs: image and textual predictions
-    imageOutput.innerHTML = `<img src="${data.output_url}" alt="Processed Baybayin Image">`;
-    // show best translation and full predictions text (predictions_txt)
-    const predText = data.predictions_txt ? data.predictions_txt : '';
-    textOutput.innerHTML = `<strong>Translation:</strong> ${data.translation}<br><pre style="white-space:pre-wrap; text-align:left;">${predText}</pre>`;
+    // Insert an actual <img> element (safer than innerHTML) and constrain its size
+    imageOutput.innerHTML = '';
+    if (data && data.output_url) {
+      const img = document.createElement('img');
+      img.src = data.output_url;
+      img.alt = 'Processed Baybayin Image';
+      img.className = 'processed-image';
+      // accessibility: announce load
+      img.setAttribute('role', 'img');
+      // apply inline constraints as a fallback
+      img.style.maxWidth = '100%';
+      img.style.maxHeight = '50vh';
+      img.style.objectFit = 'contain';
+      img.style.display = 'block';
+      img.style.margin = '0 auto';
+      imageOutput.appendChild(img);
+    } else {
+      imageOutput.innerHTML = '<p>No image returned from server.</p>';
+    }
+    // show best translation, english translation (if available), and full predictions text (predictions_txt)
+    const predText = data && data.predictions_txt ? data.predictions_txt : '';
+    let reconHtml = `<strong>Translation:</strong> ${data.translation || ''}`;
+    if (data && data.translation_en) {
+      reconHtml += `<br><em style="font-size:0.9em; color:#555;"><strong>English:</strong> ${data.translation_en}</em>`;
+    }
+    textOutput.innerHTML = reconHtml + `<br><pre style="white-space:pre-wrap; text-align:left;">${predText}</pre>`;
   } catch (error) {
     console.error("Error:", error);
     imageOutput.innerHTML = "<p>Error processing image.</p>";

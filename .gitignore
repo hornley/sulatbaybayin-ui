@@ -1,3 +1,6 @@
 *.pyc
 /models
 /logs
+.DS_Store
+.env
+best_seen.pth

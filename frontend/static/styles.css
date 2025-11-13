@@ -123,14 +123,28 @@ div {
   background: url('assets/InsertBox.png') center/cover no-repeat;
   word-break: break-all;
   text-align: center;
-  padding: 10dvh;
+  padding: 6dvh;
   box-sizing: border-box;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
 }
 
 .image-output h2, 
 .image-output .file-name {
   text-align: center;
   padding: 0;
+}
+
+/* ensure inserted processed images fit within the image-output box */
+.image-output img.processed-image {
+  max-width: 100%;
+  max-height: 50vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
 }
 
 .text-output {
